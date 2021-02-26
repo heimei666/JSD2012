@@ -29,7 +29,14 @@ public class Client {
             System.out.println("正在连接服务端...");
             //localhost表示本机IP
             //实例化的过程就是连接的过程，若连接服务端失败会抛出异常
-            socket = new Socket("localhost",8088);
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream("config.txt")
+                    )
+            );
+            String host = br.readLine();
+            int port = Integer.parseInt(br.readLine());
+            socket = new Socket(host,port);
             System.out.println("与服务端建立连接！");
         } catch (IOException e) {
             e.printStackTrace();
